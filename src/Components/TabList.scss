@@ -1,0 +1,60 @@
+// 选择器层级越多，优先级越高
+.tab-list-component {
+    // 关闭符号处理
+    .nav-item {
+        .close-icon {
+            visibility: hidden;
+        }
+    }
+
+    .nav-item:hover {
+        .close-icon {
+            visibility: visible;
+        }
+    }
+
+    .nav-item .nav-link.active {
+        .close-icon {
+            visibility: visible;
+        }
+    }
+
+    // 未保存符号处理
+    .unsaved-icon {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background-color: #d9534f;
+    }
+
+    .nav-item {
+        .close-icon {
+            display: inline-block;
+        }
+        .unsaved-icon {
+            display: none;
+        }
+    }
+
+    .nav-item {
+        .isUnsaved {
+            .close-icon {
+                display: none;
+            }
+            .unsaved-icon {
+                display: inline-block;
+            }
+        }
+    }
+
+    .nav-item {
+        .isUnsaved:hover {
+            .close-icon {
+                display: inline-block;
+            }
+            .unsaved-icon {
+                display: none;
+            }
+        }
+    }
+}

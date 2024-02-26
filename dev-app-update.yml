@@ -1,0 +1,6 @@
+owner: orgillidari
+repo: cloudnote
+provider: github
+updaterCacheDirName: cloud-note-updater
+publisherName:
+    - org.illidari

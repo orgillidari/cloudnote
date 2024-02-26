@@ -1,0 +1,115 @@
+{
+    "name": "cloud-note",
+    "description": "A simple note app",
+    "version": "1.0.1",
+    "author": "org.illidari",
+    "private": true,
+    "main": "main.js",
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "dependencies": {
+        "@electron/remote": "^2.1.1",
+        "bootstrap": "^4.6.2",
+        "electron-store": "^8.1.0"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "@fortawesome/fontawesome-svg-core": "^6.5.1",
+        "@fortawesome/free-brands-svg-icons": "^6.5.1",
+        "@fortawesome/free-solid-svg-icons": "^6.5.1",
+        "@fortawesome/react-fontawesome": "^0.2.0",
+        "@testing-library/jest-dom": "^5.17.0",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "ali-oss": "^6.20.0",
+        "axios": "^1.6.7",
+        "classnames": "^2.5.1",
+        "coffee-script": "^1.12.7",
+        "concurrently": "^8.2.2",
+        "copy-webpack-plugin": "^12.0.2",
+        "cross-env": "^7.0.3",
+        "electron": "^28.1.0",
+        "electron-builder": "^24.12.0",
+        "electron-is-dev": "^2.0.0",
+        "electron-log": "^5.1.1",
+        "electron-updater": "^6.1.8",
+        "npm-run-all": "^4.1.5",
+        "proxy-agent": "^5.0.0",
+        "qiniu": "^7.11.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "sass": "^1.69.7",
+        "uuid": "^9.0.1",
+        "vditor": "^3.9.8",
+        "wait-on": "^7.2.0",
+        "web-vitals": "^2.1.4",
+        "webpack-cli": "^5.1.4"
+    },
+    "homepage": "./",
+    "build": {
+        "appId": "org.illidari.note",
+        "productName": "note",
+        "copyright": "Copyright © year orgillidari",
+        "extends": null,
+        "files": [
+            "build/**/*",
+            "node_modules/**/*",
+            "package.json"
+        ],
+        "directories": {
+            "buildResources": "assets"
+        },
+        "icon": "logo256.ico",
+        "extraMetadata": {
+            "main": "./build/main.js"
+        },
+        "win": {
+            "target": [
+                "nsis"
+            ],
+            "icon": "build/logo256.ico",
+            "artifactName": "${productName}-${version}.${ext}",
+            "publisherName": "org.illidari",
+            "verifyUpdateCodeSignature": false
+        },
+        "nsis": {
+            "allowToChangeInstallationDirectory": true,
+            "oneClick": false,
+            "perMachine": false,
+            "installerIcon": "build/logo256.ico",
+            "uninstallerIcon": "build/logo256.ico"
+        },
+        "publish": "github"
+    },
+    "scripts": {
+        "start": "concurrently -k \"npm run react\" \"npm run electron\" ",
+        "start2": "npm-run-all --parallel --race react electron",
+        "react": "cross-env BROWSER=NONE PORT=9595 react-scripts start",
+        "electron": "wait-on http://localhost:9595 && electron .",
+        "build": "react-scripts build",
+        "buildMain": "webpack",
+        "prepack": "npm run build && npm run buildMain",
+        "pack": "electron-builder --dir",
+        "predist": "npm run build && npm run buildMain",
+        "dist": "electron-builder",
+        "prerelease": "npm run build && npm run buildMain",
+        "release": "cross-env GH_TOKEN=<GH_TOKEN> electron-builder --publish always"
+    }
+}
